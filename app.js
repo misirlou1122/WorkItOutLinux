@@ -569,6 +569,8 @@ const spanishPack = {
     "Command Lab": "Laboratorio",
     "Exam Goal": "Meta del examen",
     "Legal Note": "Nota legal",
+    "Use it when": "Usalo cuando",
+    "Home": "Inicio",
     "Set your exam date": "Pon la fecha del examen",
     "Exam date": "Fecha del examen",
     "days left": "dias restantes",
@@ -590,7 +592,7 @@ const spanishPack = {
     "Primary Red Hat documentation": "Documentacion primaria de Red Hat",
     "GNU and Linux man pages": "GNU y paginas man de Linux",
     "Trademark note": "Nota de marcas",
-    "Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds or The Linux Foundation.": "Linux® es una marca registrada de Linus Torvalds en EE. UU. y otros paises. Esta app no esta afiliada ni respaldada por Linus Torvalds ni The Linux Foundation.",
+    "Linux is a registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds or The Linux Foundation.": "Linux es una marca registrada de Linus Torvalds en EE. UU. y otros paises. Esta app no esta afiliada ni respaldada por Linus Torvalds ni The Linux Foundation.",
     "Study guide and class materials used as the exam-specific spine.": "Guia de estudio y materiales de clase usados como base especifica del examen.",
     "Used for RHEL DNF, systemd, networking, storage, SELinux, firewalld, and OpenSSH behavior.": "Usada para RHEL DNF, systemd, redes, storage, SELinux, firewalld y OpenSSH.",
     "Used for command behavior, manual sections, file descriptors, permissions, and account file facts.": "Usadas para comportamiento de comandos, secciones man, descriptores, permisos y archivos de cuentas.",
@@ -1383,6 +1385,439 @@ const questionBank = [
   q("exam", "contractor1 is not owner or group for a file. Which permission class applies?", ["User owner", "Group owner", "Other", "Root"], 2, "A user in neither owner nor group falls to other.")
 ];
 
+const lessonUseCases = {
+  "exam:0": {
+    en: [
+      "A question gives a situation, such as redirecting only errors or creating a nested path. First name the task, then choose the exact tool.",
+      "A practical asks for proof from history. Think in command recipes: create, verify, redirect, then show history."
+    ],
+    es: [
+      "Una pregunta da una situacion, como redirigir solo errores o crear una ruta anidada. Primero nombra la tarea, luego elige la herramienta exacta.",
+      "Una practica pide evidencia del history. Piensa en recetas: crear, verificar, redirigir y luego mostrar history."
+    ]
+  },
+  "exam:1": {
+    en: [
+      "A directory tree has several parent folders. Use mkdir -p instead of creating each level one at a time.",
+      "A command asks you to append a user to a group without breaking existing membership. That is the -aG trap."
+    ],
+    es: [
+      "Un arbol de directorios tiene varios folders padres. Usa mkdir -p en vez de crear cada nivel uno por uno.",
+      "Un comando pide agregar un usuario a un grupo sin romper membresias existentes. Esa es la trampa de -aG."
+    ]
+  },
+  "exam:2": {
+    en: [
+      "A lab asks for a screenshot of commands used. Use history after the work is done so the proof matches the actions.",
+      "A task says not to use an editor, echo, or getent. That is a clue to use grep and redirection."
+    ],
+    es: [
+      "Un lab pide screenshot de los comandos usados. Usa history al final para que la evidencia coincida con las acciones.",
+      "Una tarea dice que no uses editor, echo o getent. Eso apunta a grep con redireccion."
+    ]
+  },
+  "basics:0": {
+    en: [
+      "A lab says to open two terminals: one runs the command, the other observes or fixes it.",
+      "A prompt changes from $ to #. That means your privilege level changed."
+    ],
+    es: [
+      "Un lab dice abrir dos terminales: una ejecuta el comando, la otra observa o corrige.",
+      "Un prompt cambia de $ a #. Eso significa que cambio tu nivel de privilegio."
+    ]
+  },
+  "basics:1": {
+    en: [
+      "A question asks for the exact command, not keystrokes. Write only the command and options, such as man program or command -option.",
+      "A tool behaves differently with one option. Identify the command, then the option, then the argument."
+    ],
+    es: [
+      "Una pregunta pide el comando exacto, no teclas. Escribe solo el comando y opciones, como man programa o comando -opcion.",
+      "Una herramienta cambia con una opcion. Identifica comando, opcion y argumento."
+    ]
+  },
+  "basics:2": {
+    en: [
+      "A new command appears in a lab, like a terminal animation tool. Open its man page before guessing options.",
+      "A command has too many flags to memorize. Use man -k or man command, then search inside the page."
+    ],
+    es: [
+      "Aparece un comando nuevo en un lab, como una herramienta de animacion terminal. Abre su man page antes de adivinar opciones.",
+      "Un comando tiene demasiadas flags para memorizar. Usa man -k o man comando y busca dentro de la pagina."
+    ]
+  },
+  "filesystem:0": {
+    en: [
+      "A task names a starting folder and nested child folders. Draw the path before typing the mkdir command.",
+      "A question compares / and /root. Remember that / is the whole tree; /root is only root's home."
+    ],
+    es: [
+      "Una tarea nombra un folder inicial y subfolders anidados. Dibuja la ruta antes de escribir mkdir.",
+      "Una pregunta compara / y /root. Recuerda que / es todo el arbol; /root es solo el home de root."
+    ]
+  },
+  "filesystem:1": {
+    en: [
+      "A lab says to prove where you are before creating files. Use pwd and ls so the path is clear.",
+      "A directory command fails because the parent is missing. Move to the right place or use an absolute path."
+    ],
+    es: [
+      "Un lab pide probar donde estas antes de crear archivos. Usa pwd y ls para dejar clara la ruta.",
+      "Un comando de directorio falla porque falta el padre. Muévete al lugar correcto o usa ruta absoluta."
+    ]
+  },
+  "filesystem:2": {
+    en: [
+      "A practice asks you to create a file, copy it, rename it, try rmdir, then remove everything. That is touch, cp, mv, rmdir, then rm -r.",
+      "A command mix-up asks for surprising behavior. cat on a directory errors; ls lists a directory; mv renames or moves instead of deleting."
+    ],
+    es: [
+      "Una practica pide crear archivo, copiarlo, renombrarlo, probar rmdir y luego limpiar todo. Eso es touch, cp, mv, rmdir y rm -r.",
+      "Un ejercicio mezcla comandos para resultados raros. cat sobre directorio da error; ls lista; mv renombra o mueve, no borra."
+    ]
+  },
+  "permissions:0": {
+    en: [
+      "A user cannot delete in a shared directory even though files are readable. Check write permission on the directory.",
+      "A question asks whether other users can access something. Read the third permission triplet."
+    ],
+    es: [
+      "Un usuario no puede borrar en un directorio compartido aunque los archivos sean legibles. Revisa write en el directorio.",
+      "Una pregunta pregunta si otros usuarios pueden acceder. Lee el tercer triplete de permisos."
+    ]
+  },
+  "permissions:1": {
+    en: [
+      "A shared class folder should keep new files in the same group. Use SGID on the directory.",
+      "A temporary shared folder should prevent users from deleting each other's files. Use sticky bit."
+    ],
+    es: [
+      "Un folder compartido de clase debe mantener nuevos archivos en el mismo grupo. Usa SGID en el directorio.",
+      "Un folder temporal compartido debe evitar que usuarios borren archivos de otros. Usa sticky bit."
+    ]
+  },
+  "permissions:2": {
+    en: [
+      "A shortcut should break if the original path disappears. That is a symbolic link.",
+      "Two filenames should keep the same data even if one name is removed. That is a hard link."
+    ],
+    es: [
+      "Un acceso directo debe romperse si desaparece la ruta original. Eso es enlace simbolico.",
+      "Dos nombres deben conservar los mismos datos aunque se borre uno. Eso es hard link."
+    ]
+  },
+  "users:0": {
+    en: [
+      "A task asks you to redirect the last lines of /etc/passwd to a file. You are inspecting account records.",
+      "A lab changes a user's shell field for practice. Know that the last /etc/passwd field is the login shell."
+    ],
+    es: [
+      "Una tarea pide redirigir las ultimas lineas de /etc/passwd a un archivo. Estas inspeccionando cuentas.",
+      "Un lab cambia el campo shell de un usuario para practicar. Recuerda que el ultimo campo de /etc/passwd es login shell."
+    ]
+  },
+  "users:1": {
+    en: [
+      "A class task asks for several made-up users and groups. Use useradd, groupadd, and groupmod for the GID.",
+      "A command must add multiple users to one group. Repeat usermod -aG group user for each account."
+    ],
+    es: [
+      "Una tarea pide varios usuarios y grupos inventados. Usa useradd, groupadd y groupmod para el GID.",
+      "Un comando debe agregar varios usuarios a un grupo. Repite usermod -aG grupo usuario para cada cuenta."
+    ]
+  },
+  "users:2": {
+    en: [
+      "A lab says run one command as another account without switching sessions. Use sudo -u user command.",
+      "A user needs admin rights through a group. Put the group rule in sudoers with the percent sign."
+    ],
+    es: [
+      "Un lab dice ejecutar un comando como otra cuenta sin cambiar de sesion. Usa sudo -u usuario comando.",
+      "Un usuario necesita derechos admin por grupo. Pon la regla de grupo en sudoers con signo de porcentaje."
+    ]
+  },
+  "vimman:0": {
+    en: [
+      "A program option changes color, speed, or display. Use man program to discover the option, then run it.",
+      "A terminal program cannot change the emulator font. If an option only works in the real console, explain that difference."
+    ],
+    es: [
+      "Una opcion de programa cambia color, velocidad o display. Usa man programa para descubrir la opcion y ejecutarla.",
+      "Un programa terminal no siempre puede cambiar la fuente del emulador. Si solo funciona en consola real, explica esa diferencia."
+    ]
+  },
+  "vimman:1": {
+    en: [
+      "A task asks you to edit one field in a text file. Open it in Vim, move to the line, change text, write, and quit.",
+      "A file has repeated text that must change everywhere. Use a Vim substitution instead of editing one by one."
+    ],
+    es: [
+      "Una tarea pide editar un campo en un archivo de texto. Abre en Vim, ve a la linea, cambia texto, guarda y sal.",
+      "Un archivo tiene texto repetido que debe cambiar en todas partes. Usa sustitucion de Vim en vez de editar uno por uno."
+    ]
+  },
+  "vimman:2": {
+    en: [
+      "A question asks what an option does. Man pages show syntax in SYNOPSIS and details in OPTIONS.",
+      "A command name appears in more than one section. Use man 5 or man 8 when the section matters."
+    ],
+    es: [
+      "Una pregunta pide que hace una opcion. Las man pages muestran sintaxis en SYNOPSIS y detalles en OPTIONS.",
+      "Un comando aparece en mas de una seccion. Usa man 5 o man 8 cuando la seccion importa."
+    ]
+  },
+  "shell:0": {
+    en: [
+      "A fake command produces normal output and an error. Redirect stdout and stderr separately to prove you know the descriptors.",
+      "A task says save only errors. Use 2> file because stderr is descriptor 2."
+    ],
+    es: [
+      "Un comando falso produce salida normal y error. Redirige stdout y stderr por separado para probar que conoces los descriptores.",
+      "Una tarea dice guardar solo errores. Usa 2> archivo porque stderr es descriptor 2."
+    ]
+  },
+  "shell:1": {
+    en: [
+      "A task asks to save output and errors together. Use &> file or redirect stderr into stdout.",
+      "A task says show output but discard errors. Send stderr to /dev/null while leaving stdout on screen."
+    ],
+    es: [
+      "Una tarea pide guardar salida y errores juntos. Usa &> archivo o redirige stderr hacia stdout.",
+      "Una tarea dice mostrar salida pero descartar errores. Envia stderr a /dev/null y deja stdout en pantalla."
+    ]
+  },
+  "shell:2": {
+    en: [
+      "A lab asks for a variable that becomes an environment variable. Assign it, export it, then verify with env or printenv.",
+      "A challenge forbids pipes but wants command output stored in a variable. Use command substitution like VAR=$(command)."
+    ],
+    es: [
+      "Un lab pide una variable que se convierta en variable de entorno. Asignala, exportala y verifica con env o printenv.",
+      "Un reto prohibe pipes pero quiere salida de comando en una variable. Usa sustitucion de comando como VAR=$(comando)."
+    ]
+  },
+  "dnf:0": {
+    en: [
+      "A lab asks you to install a fun command-line package. On RHEL-style systems use dnf; on Debian-style systems the equivalent is apt.",
+      "A package name is unknown. Search first, then install the exact package."
+    ],
+    es: [
+      "Un lab pide instalar un paquete divertido de linea de comandos. En sistemas estilo RHEL usa dnf; en Debian el equivalente es apt.",
+      "No conoces el nombre del paquete. Busca primero y luego instala el paquete exacto."
+    ]
+  },
+  "dnf:1": {
+    en: [
+      "A tool is missing from the shell. Install it, confirm it runs, then use history to show the command sequence.",
+      "A package causes clutter or is no longer needed. Remove it with the package manager."
+    ],
+    es: [
+      "Falta una herramienta en el shell. Instalalo, confirma que corre y usa history para mostrar la secuencia.",
+      "Un paquete ya no se necesita. Quitalo con el administrador de paquetes."
+    ]
+  },
+  "dnf:2": {
+    en: [
+      "A system needs updates without a person typing dnf every time. Configure dnf-automatic and its timer.",
+      "A question mentions scheduled package updates. Think systemd timer."
+    ],
+    es: [
+      "Un sistema necesita actualizaciones sin que alguien escriba dnf cada vez. Configura dnf-automatic y su timer.",
+      "Una pregunta menciona actualizaciones programadas de paquetes. Piensa en timer de systemd."
+    ]
+  },
+  "systemd:0": {
+    en: [
+      "A service has custom startup behavior. Inspect the unit file and remember where admin overrides live.",
+      "After editing a unit file, run daemon-reload before expecting systemd to see it."
+    ],
+    es: [
+      "Un servicio tiene comportamiento personalizado al iniciar. Inspecciona el unit file y recuerda donde viven overrides admin.",
+      "Despues de editar un unit file, ejecuta daemon-reload antes de esperar que systemd lo vea."
+    ]
+  },
+  "systemd:1": {
+    en: [
+      "A service should work now and after reboot. Use systemctl enable --now service.",
+      "A service config changed but the service can reload safely. Try reload before full restart when supported."
+    ],
+    es: [
+      "Un servicio debe funcionar ahora y despues de reiniciar. Usa systemctl enable --now servicio.",
+      "Cambio la configuracion de un servicio pero puede recargar seguro. Prueba reload antes de restart si lo soporta."
+    ]
+  },
+  "systemd:2": {
+    en: [
+      "A VM should boot to text mode instead of graphical mode. Change the default target.",
+      "A boot feels slow. Use systemd-analyze to see what took time."
+    ],
+    es: [
+      "Una VM debe arrancar en modo texto en vez de modo grafico. Cambia el target predeterminado.",
+      "Un arranque se siente lento. Usa systemd-analyze para ver que tardo."
+    ]
+  },
+  "networking:0": {
+    en: [
+      "A network lab asks whether the profile or interface is wrong. Compare nmcli connection show with nmcli device status.",
+      "A VM has multiple adapters. The connection profile is settings; the device is the actual interface."
+    ],
+    es: [
+      "Un lab de red pregunta si falla el perfil o la interfaz. Compara nmcli connection show con nmcli device status.",
+      "Una VM tiene varios adaptadores. El perfil es configuracion; el device es la interfaz real."
+    ]
+  },
+  "networking:1": {
+    en: [
+      "A lab gives an IP, gateway, and DNS. That means configure a manual IPv4 profile.",
+      "After changing a profile, bring it up again so the settings apply."
+    ],
+    es: [
+      "Un lab da IP, gateway y DNS. Eso significa configurar un perfil IPv4 manual.",
+      "Despues de cambiar un perfil, levantalo otra vez para aplicar la configuracion."
+    ]
+  },
+  "networking:2": {
+    en: [
+      "A question says one physical network carries multiple logical networks. That points to VLANs.",
+      "A virtualization host needs VMs on the network. That often points to a bridge."
+    ],
+    es: [
+      "Una pregunta dice que una red fisica carga multiples redes logicas. Eso apunta a VLANs.",
+      "Un host de virtualizacion necesita VMs en la red. Eso suele apuntar a bridge."
+    ]
+  },
+  "security:0": {
+    en: [
+      "A lab asks you to block and then allow SSH access. Stop/disable sshd or change firewall rules, then test from the second terminal.",
+      "A user can ping but cannot SSH. Check sshd status, firewall, route, address, and logs."
+    ],
+    es: [
+      "Un lab pide bloquear y luego permitir SSH. Deten/deshabilita sshd o cambia firewall y prueba desde la segunda terminal.",
+      "Un usuario puede hacer ping pero no SSH. Revisa sshd, firewall, ruta, direccion y logs."
+    ]
+  },
+  "security:1": {
+    en: [
+      "A secure site or internal service has trust errors. Check certificates and the system trust store.",
+      "A question mentions identity plus encryption. Think TLS."
+    ],
+    es: [
+      "Un sitio seguro o servicio interno tiene errores de confianza. Revisa certificados y el trust store del sistema.",
+      "Una pregunta menciona identidad mas cifrado. Piensa en TLS."
+    ]
+  },
+  "security:2": {
+    en: [
+      "A service is running but remote clients cannot connect. Check firewall-cmd --list-all.",
+      "A rule works now but disappears after reload. Make it permanent or save runtime to permanent."
+    ],
+    es: [
+      "Un servicio esta corriendo pero clientes remotos no conectan. Revisa firewall-cmd --list-all.",
+      "Una regla funciona ahora pero desaparece tras reload. Hazla permanente o guarda runtime a permanent."
+    ]
+  },
+  "storage:0": {
+    en: [
+      "A removable drive appears as /dev/sdb1 and should be browsed under /mnt/usb. Mount the device to the directory.",
+      "A mount should survive reboot. Put a UUID-based entry in /etc/fstab."
+    ],
+    es: [
+      "Un drive removible aparece como /dev/sdb1 y debe verse en /mnt/usb. Monta el device en el directorio.",
+      "Un montaje debe sobrevivir reinicio. Pon una entrada con UUID en /etc/fstab."
+    ]
+  },
+  "storage:1": {
+    en: [
+      "A disk is local and needs a Linux filesystem. Choose XFS or ext4 depending on the environment.",
+      "A share comes from another server. Think NFS or SMB instead of local filesystems."
+    ],
+    es: [
+      "Un disco es local y necesita sistema de archivos Linux. Elige XFS o ext4 segun el entorno.",
+      "Un share viene de otro servidor. Piensa en NFS o SMB, no filesystem local."
+    ]
+  },
+  "storage:2": {
+    en: [
+      "A disk layout should grow later. Use LVM so storage can be managed through PV, VG, and LV layers.",
+      "A question asks for the build order. Prepare PVs, create a VG, then create LVs."
+    ],
+    es: [
+      "Un layout de disco debe crecer despues. Usa LVM para manejar storage con capas PV, VG y LV.",
+      "Una pregunta pide el orden de construccion. Prepara PVs, crea VG y luego LVs."
+    ]
+  },
+  "processmedia:0": {
+    en: [
+      "A screenshot shows file and cat examples. Use file to identify type, then cat only when the contents are short enough.",
+      "A log is too long for cat. Use less to browse or tail -f to watch it update."
+    ],
+    es: [
+      "Un screenshot muestra ejemplos de file y cat. Usa file para identificar tipo, luego cat solo si el contenido es corto.",
+      "Un log es demasiado largo para cat. Usa less para navegar o tail -f para verlo actualizarse."
+    ]
+  },
+  "processmedia:1": {
+    en: [
+      "A terminal is running yes and consuming CPU. Use top or ps from another terminal to find it.",
+      "A process shows Z in ps output. It is a zombie waiting for its parent to collect status."
+    ],
+    es: [
+      "Una terminal corre yes y consume CPU. Usa top o ps desde otra terminal para encontrarlo.",
+      "Un proceso muestra Z en ps. Es zombie esperando que el parent recoja su estado."
+    ]
+  },
+  "processmedia:2": {
+    en: [
+      "A runaway command will not stop normally. Try TERM first, then KILL only if needed.",
+      "A CPU-heavy job should be less important than interactive work. Start it with nice or adjust with renice."
+    ],
+    es: [
+      "Un comando fuera de control no se detiene normal. Prueba TERM primero, luego KILL solo si hace falta.",
+      "Un trabajo pesado de CPU debe ser menos importante que trabajo interactivo. Inicialo con nice o ajusta con renice."
+    ]
+  },
+  "processmedia:3": {
+    en: [
+      "A USB or extra virtual disk appears but you do not know the device name. Run lsblk and blkid.",
+      "Before unplugging media, run umount so pending writes finish."
+    ],
+    es: [
+      "Un USB o disco virtual extra aparece pero no sabes el nombre del device. Ejecuta lsblk y blkid.",
+      "Antes de retirar medios, ejecuta umount para terminar escrituras pendientes."
+    ]
+  },
+  "selinux:0": {
+    en: [
+      "A service works only when SELinux is permissive. That means policy or labels need troubleshooting.",
+      "A mode change is only for testing. setenforce does not permanently change reboot behavior."
+    ],
+    es: [
+      "Un servicio solo funciona cuando SELinux esta permissive. Eso significa que politica o etiquetas necesitan revision.",
+      "Un cambio de modo es solo para probar. setenforce no cambia permanentemente el comportamiento tras reboot."
+    ]
+  },
+  "selinux:1": {
+    en: [
+      "A web file has normal Unix permissions but the service still cannot read it. Check ls -Z and restore contexts.",
+      "A custom content path should work after relabeling. Add a persistent fcontext rule, then restorecon."
+    ],
+    es: [
+      "Un archivo web tiene permisos Unix normales pero el servicio no puede leerlo. Revisa ls -Z y restaura contextos.",
+      "Una ruta personalizada debe funcionar despues de relabel. Agrega regla fcontext persistente y luego restorecon."
+    ]
+  },
+  "selinux:2": {
+    en: [
+      "A port or service opens for testing but vanishes later. Runtime firewalld rules were not saved.",
+      "A lab says allow SSH again. Add the service to the right zone and reload if using permanent rules."
+    ],
+    es: [
+      "Un puerto o servicio abre para prueba pero desaparece despues. Las reglas runtime no se guardaron.",
+      "Un lab dice permitir SSH otra vez. Agrega el servicio a la zona correcta y reload si usas reglas permanentes."
+    ]
+  }
+};
+
 const cramItems = [
   ["usermod -aG group user", "-aG appends a supplementary group. -G without -a replaces the list.", "-aG agrega un grupo suplementario. -G sin -a reemplaza la lista."],
   ["chmod 2775 dir", "Leading 2 sets SGID so new files can inherit the directory group.", "El 2 inicial activa SGID para que archivos nuevos puedan heredar el grupo del directorio."],
@@ -1985,6 +2420,7 @@ function renderLesson() {
           <h2>${escapeHtml(lesson.title)}</h2>
           ${(lesson.body || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("")}
           ${(lesson.commands || []).map((cmd) => `<pre class="code-strip"><code>${escapeHtml(cmd)}</code></pre>`).join("")}
+          ${renderLessonUseCases(topic.id, state.lessonIndex)}
           ${lesson.remember ? `<div class="memory-box"><strong>${escapeHtml(t("Remember"))}:</strong> ${escapeHtml(lesson.remember)}</div>` : ""}
         </div>
       </article>
@@ -1995,6 +2431,20 @@ function renderLesson() {
         <button class="icon-button" data-action="nextLesson">${icon("next")}</button>
       </nav>
     </main>
+  `;
+}
+
+function renderLessonUseCases(topicId, lessonIndex) {
+  const item = lessonUseCases[`${topicId}:${lessonIndex}`];
+  if (!item) return "";
+  const examples = state.language === "es" ? item.es : item.en;
+  return `
+    <section class="use-case-box">
+      <h3>${escapeHtml(t("Use it when"))}</h3>
+      <ul>
+        ${examples.map((example) => `<li>${escapeHtml(example)}</li>`).join("")}
+      </ul>
+    </section>
   `;
 }
 
@@ -2069,6 +2519,7 @@ function renderQuizScore() {
         <p>${correct} ${escapeHtml(t("correct out of"))} ${total}. ${escapeHtml(t(score >= 80 ? "That is solid exam energy." : "Review the missed questions, then run another drill."))}</p>
         ${missed.length ? `<button class="pill-button" data-action="reviewMissed">${escapeHtml(t("Review Missed"))} (${missed.length})</button>` : ""}
         <button class="pill-button secondary" data-action="restartQuiz">${escapeHtml(t("Try Again"))}</button>
+        <button class="pill-button secondary" data-action="home">${escapeHtml(t("Home"))}</button>
       </section>
     </main>
   `;
@@ -2227,7 +2678,7 @@ function renderMissesEmpty() {
 
 function renderSources() {
   const sources = [
-    [t("Trademark note"), t("Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds or The Linux Foundation.")]
+    [t("Trademark note"), t("Linux is a registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds or The Linux Foundation.")]
   ];
   return `
     <main class="screen">
@@ -2260,8 +2711,9 @@ function startQuiz(topicId, options = {}) {
   state.selected = null;
   state.answers = {};
   state.resultSaved = false;
-  const source = options.questions || pickQuizSource(topicId);
+  const source = options.questions || pickQuizSource(topicId, options);
   state.activeQuestions = source.map(randomizeQuestion);
+  if (!options.questions) rememberQuizQuestions(quizHistoryKey(topicId, options), source);
   render();
 }
 
@@ -2291,13 +2743,13 @@ function startMissNotebook() {
   });
 }
 
-function pickQuizSource(topicId) {
+function pickQuizSource(topicId, options = {}) {
   if (topicId === "final") return balancedFinalQuestions();
   if (topicId === "misses") return missedQuestions();
   const bank = localizedQuestionBank();
   if (topicId === "daily") return shuffle(bank).slice(0, 7);
   const pool = topicId === "exam" ? bank : bank.filter((item) => item.topic === topicId);
-  return shuffle(pool).slice(0, Math.min(topicId === "exam" ? 45 : 8, pool.length));
+  return freshQuizPick(pool, Math.min(topicId === "exam" ? 45 : 8, pool.length), quizHistoryKey(topicId, options));
 }
 
 function balancedFinalQuestions() {
@@ -2318,6 +2770,26 @@ function balancedFinalQuestions() {
 
 function pickFromTopics(topicIds, count) {
   return shuffle(localizedQuestionBank().filter((item) => topicIds.includes(item.topic))).slice(0, count);
+}
+
+function quizHistoryKey(topicId, options = {}) {
+  return `linux-quiz-history-${options.sourceTopic || topicId}-${options.mode || "topic"}-${state.language}`;
+}
+
+function freshQuizPick(pool, count, key) {
+  const recent = new Set(load(key, []));
+  const fresh = pool.filter((item) => !recent.has(item.id));
+  const firstPass = shuffle(fresh).slice(0, count);
+  if (firstPass.length >= count) return firstPass;
+  const used = new Set(firstPass.map((item) => item.id));
+  const refill = shuffle(pool.filter((item) => !used.has(item.id))).slice(0, count - firstPass.length);
+  return [...firstPass, ...refill];
+}
+
+function rememberQuizQuestions(key, questions) {
+  const prior = load(key, []);
+  const next = [...questions.map((item) => item.id), ...prior].filter(Boolean);
+  save(key, [...new Set(next)].slice(0, 18));
 }
 
 function randomizeQuestion(item) {
@@ -2479,6 +2951,10 @@ function wire() {
 function act(action) {
   if (action === "back") return back();
   if (action === "info") return alert(t("Swipe left or right on lesson, quiz, and flash card screens. Progress stays on this device."));
+  if (action === "home") {
+    state.screen = "home";
+    return render();
+  }
   if (action === "search" || action === "openSearch") {
     state.screen = "search";
     state.searchQuery = "";
