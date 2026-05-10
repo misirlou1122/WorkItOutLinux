@@ -1,6 +1,6 @@
 # Work It Out: Linux
 
-A pink chrome Linux final study app built as a single-page static web app.
+A Linux final study app built as a single-page static web app.
 
 The app includes Linux lessons, flash cards, daily drills, command practice, missed-question review, final practice, and English/Spanish study modes.
 
