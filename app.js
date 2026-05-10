@@ -568,7 +568,7 @@ const spanishPack = {
     "My Misses": "Mis falladas",
     "Command Lab": "Laboratorio",
     "Exam Goal": "Meta del examen",
-    "Sources": "Fuentes",
+    "Legal Note": "Nota legal",
     "Set your exam date": "Pon la fecha del examen",
     "Exam date": "Fecha del examen",
     "days left": "dias restantes",
@@ -1874,7 +1874,7 @@ function renderHome() {
         <button class="topic-card" data-action="openCommandLab"><span class="topic-icon">${icon("flask")}</span><span>${escapeHtml(t("Command Lab"))}</span></button>
         <button class="topic-card" data-action="startFlashCards"><span class="topic-icon">${icon("cards")}</span><span>${escapeHtml(t("Flash Cards"))}</span></button>
         <button class="topic-card" data-action="startFinalPractice"><span class="topic-icon">${icon("star")}</span><span>${escapeHtml(t("Final Practice"))}</span></button>
-        <button class="topic-card" data-action="openSources"><span class="topic-icon">${icon("link")}</span><span>${escapeHtml(t("Sources"))}</span></button>
+        <button class="topic-card" data-action="openSources"><span class="topic-icon">${icon("link")}</span><span>${escapeHtml(t("Legal Note"))}</span></button>
       </section>
     </main>
   `;
@@ -2231,7 +2231,7 @@ function renderSources() {
   ];
   return `
     <main class="screen">
-      ${renderTopbar(t("Sources"), "back", "info")}
+      ${renderTopbar(t("Legal Note"), "back", "info")}
       <section class="reader-card utility-card">
         <h2>${escapeHtml(t("Source Notes"))}</h2>
         <div class="source-list">
