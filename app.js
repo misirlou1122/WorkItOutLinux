@@ -471,6 +471,53 @@ const topics = [
     ]
   },
   {
+    id: "processmedia",
+    title: "Processes Media Files",
+    icon: "activity",
+    lessons: [
+      {
+        title: "File Type And Viewing",
+        body: [
+          "Linux does not require filename extensions to decide file type. The file command examines file contents and metadata to report the type.",
+          "cat prints file contents and can concatenate multiple files. Use it for short files, quick checks, or redirecting content.",
+          "less is better for long files because you can scroll and search. head shows the beginning of a file and tail shows the end; tail -f follows a growing log file."
+        ],
+        commands: ["file /etc/passwd", "cat /etc/passwd", "less /var/log/messages", "head -n 20 file.txt", "tail -f /var/log/messages"],
+        remember: "file identifies type. cat dumps contents. less browses. head starts. tail ends or follows."
+      },
+      {
+        title: "Processes And States",
+        body: [
+          "A process is a running instance of a program. ps shows process snapshots, top gives a live process view, and pgrep finds process IDs by name.",
+          "Common process states include R for running, S for sleeping, T for stopped, and Z for zombie. A zombie has exited but still has an entry until its parent collects its status.",
+          "Every process has a PID. A parent process has a PPID. Many tools let you filter or act on processes by PID, command name, user, or terminal."
+        ],
+        commands: ["ps aux", "ps -ef", "top", "pgrep sshd", "pstree"],
+        remember: "ps is a snapshot. top is live. PID identifies one process."
+      },
+      {
+        title: "Signals And Priority",
+        body: [
+          "kill sends a signal to a process by PID. The default signal is TERM, which asks a process to stop cleanly.",
+          "kill -9 sends KILL, which forces termination and cannot be caught or ignored. Use it when a normal TERM does not work.",
+          "nice starts a process with an adjusted priority. renice changes priority for an existing process. Lower nice values mean higher scheduling priority; regular users can usually only increase nice values."
+        ],
+        commands: ["kill 1234", "kill -TERM 1234", "kill -9 1234", "nice -n 10 command", "renice 5 -p 1234"],
+        remember: "TERM asks. KILL forces. nice starts with priority. renice changes an existing process."
+      },
+      {
+        title: "Removable Media And Devices",
+        body: [
+          "lsblk lists block devices in a tree, which helps identify disks, partitions, and removable media. blkid shows filesystem UUIDs and labels.",
+          "A device must have a filesystem mounted on a directory before you browse its files. mount attaches it and umount detaches it.",
+          "If a removable device is not obvious, check lsblk, blkid, dmesg, or journalctl for detection messages. Always unmount before removing media to avoid data loss."
+        ],
+        commands: ["lsblk", "blkid", "mount /dev/sdb1 /mnt/usb", "umount /mnt/usb", "dmesg | tail"],
+        remember: "Detect with lsblk/blkid. Attach with mount. Detach safely with umount."
+      }
+    ]
+  },
+  {
     id: "selinux",
     title: "SELinux Firewalld",
     icon: "shield",
@@ -990,6 +1037,47 @@ const spanishPack = {
         }
       ]
     },
+    processmedia: {
+      title: "Procesos Medios Archivos",
+      lessons: [
+        {
+          title: "Tipo De Archivo Y Visualizacion",
+          body: [
+            "Linux no requiere extensiones de archivo para decidir el tipo. El comando file examina contenido y metadata para reportar el tipo.",
+            "cat imprime contenido de archivos y puede concatenar multiples archivos. Usalo para archivos cortos, revisiones rapidas o redirigir contenido.",
+            "less es mejor para archivos largos porque puedes desplazarte y buscar. head muestra el inicio de un archivo y tail muestra el final; tail -f sigue un log mientras crece."
+          ],
+          remember: "file identifica tipo. cat muestra contenido. less navega. head empieza. tail termina o sigue."
+        },
+        {
+          title: "Procesos Y Estados",
+          body: [
+            "Un proceso es una instancia en ejecucion de un programa. ps muestra snapshots de procesos, top da una vista en vivo y pgrep encuentra PIDs por nombre.",
+            "Estados comunes incluyen R para running, S para sleeping, T para stopped y Z para zombie. Un zombie ya termino pero mantiene una entrada hasta que su parent recoge su estado.",
+            "Cada proceso tiene un PID. Un proceso padre tiene PPID. Muchas herramientas permiten filtrar o actuar sobre procesos por PID, nombre de comando, usuario o terminal."
+          ],
+          remember: "ps es snapshot. top es en vivo. PID identifica un proceso."
+        },
+        {
+          title: "Signals Y Prioridad",
+          body: [
+            "kill envia una signal a un proceso por PID. La signal predeterminada es TERM, que pide al proceso detenerse limpiamente.",
+            "kill -9 envia KILL, que fuerza la terminacion y no puede atraparse ni ignorarse. Usalo cuando TERM normal no funciona.",
+            "nice inicia un proceso con prioridad ajustada. renice cambia prioridad de un proceso existente. Valores nice mas bajos significan mayor prioridad de scheduling; usuarios regulares normalmente solo pueden aumentar el valor nice."
+          ],
+          remember: "TERM pide. KILL fuerza. nice inicia con prioridad. renice cambia un proceso existente."
+        },
+        {
+          title: "Medios Removibles Y Devices",
+          body: [
+            "lsblk lista block devices en forma de arbol, lo cual ayuda a identificar discos, particiones y medios removibles. blkid muestra UUIDs y labels de sistemas de archivos.",
+            "Un device debe tener un sistema de archivos montado en un directorio antes de navegar sus archivos. mount lo conecta y umount lo desconecta.",
+            "Si un device removible no aparece claramente, revisa lsblk, blkid, dmesg o journalctl para mensajes de deteccion. Siempre desmonta antes de retirar medios para evitar perdida de datos."
+          ],
+          remember: "Detecta con lsblk/blkid. Conecta con mount. Desconecta seguro con umount."
+        }
+      ]
+    },
     selinux: {
       title: "SELinux Firewalld",
       lessons: [
@@ -1097,6 +1185,18 @@ const spanishPack = {
     "lvm-pv": ["Physical volume de LVM", "Disco o particion preparado para LVM"],
     "lvm-vg": ["Volume group de LVM", "Pool de espacio de physical volumes"],
     "lvm-lv": ["Logical volume de LVM", "Device de bloque virtual usable"],
+    "file-cmd": ["Identificar tipo de archivo por contenido", "file"],
+    "cat-cmd": ["Ver o concatenar archivos cortos", "cat"],
+    "less-cmd": ["Navegar un archivo largo", "less"],
+    "head-tail": ["Ver inicio/final de un archivo", "head y tail"],
+    "ps-cmd": ["Snapshot de procesos", "ps"],
+    "top-cmd": ["Vista en vivo de procesos", "top"],
+    "kill-term": ["Signal predeterminada de kill", "TERM"],
+    "kill-nine": ["Signal que fuerza terminacion", "KILL (-9)"],
+    "nice-cmd": ["Iniciar proceso con prioridad ajustada", "nice"],
+    "renice-cmd": ["Cambiar prioridad de un proceso existente", "renice"],
+    "lsblk-cmd": ["Listar block devices", "lsblk"],
+    "umount-cmd": ["Desconectar un sistema de archivos montado", "umount"],
     "setenforce": ["Cambiar SELinux enforcing/permissive temporalmente", "setenforce"],
     "permissive": ["Modo SELinux que registra pero no deniega", "Permisivo"],
     "firewalld-zone": ["Grupo de confianza/reglas en firewalld", "Zona"],
@@ -1176,6 +1276,18 @@ const flashCardBank = [
   ["lvm-pv", "LVM physical volume", "Disk or partition prepared for LVM", "storage"],
   ["lvm-vg", "LVM volume group", "Pool of physical volume space", "storage"],
   ["lvm-lv", "LVM logical volume", "Usable virtual block device", "storage"],
+  ["file-cmd", "Identify file type by contents", "file", "processmedia"],
+  ["cat-cmd", "View or concatenate short files", "cat", "processmedia"],
+  ["less-cmd", "Browse a long file", "less", "processmedia"],
+  ["head-tail", "View file beginning/end", "head and tail", "processmedia"],
+  ["ps-cmd", "Process snapshot command", "ps", "processmedia"],
+  ["top-cmd", "Live process monitor", "top", "processmedia"],
+  ["kill-term", "Default kill signal", "TERM", "processmedia"],
+  ["kill-nine", "Forceful termination signal", "KILL (-9)", "processmedia"],
+  ["nice-cmd", "Start a process with adjusted priority", "nice", "processmedia"],
+  ["renice-cmd", "Change priority of an existing process", "renice", "processmedia"],
+  ["lsblk-cmd", "List block devices", "lsblk", "processmedia"],
+  ["umount-cmd", "Detach a mounted filesystem", "umount", "processmedia"],
   ["getenforce", "Check SELinux mode", "getenforce", "selinux"],
   ["setenforce", "Temporarily switch SELinux enforcing/permissive", "setenforce", "selinux"],
   ["permissive", "SELinux mode that logs but does not deny", "Permissive", "selinux"],
@@ -1246,6 +1358,18 @@ const questionBank = [
   q("storage", "Which pair are network file systems?", ["XFS and ext4", "NFS and SMB", "LVM and VDO", "SUID and SGID"], 1, "NFS and SMB provide network file access."),
   q("storage", "In LVM, what is a volume group?", ["A pool of space made from physical volumes", "A user group in /etc/group", "A firewall zone", "A systemd target"], 0, "A VG pools PV space and allocates logical volumes."),
   q("storage", "What is the usual LVM build order?", ["lvcreate, vgcreate, pvcreate", "pvcreate, vgcreate, lvcreate", "mkfs, passwd, chmod", "mount, ssh, dnf"], 1, "Prepare PVs, create a VG, then create LVs."),
+  q("processmedia", "Which command identifies a file's type by examining its contents?", ["cat", "file", "less", "tail"], 1, "file reports file type by inspecting contents and metadata."),
+  q("processmedia", "Which command is best for paging through a long text file?", ["less", "cat", "touch", "kill"], 0, "less lets you scroll and search through long files."),
+  q("processmedia", "Which command follows new lines added to a growing log file?", ["head -n 5 log", "tail -f log", "file log", "ps log"], 1, "tail -f follows appended log output."),
+  q("processmedia", "Which command shows a snapshot of running processes?", ["ps", "top", "nice", "umount"], 0, "ps shows a process snapshot."),
+  q("processmedia", "Which command gives a live updating process view?", ["file", "top", "cat", "lsblk"], 1, "top displays an interactive live process view."),
+  q("processmedia", "In process state letters, what does Z commonly mean?", ["Zombie", "Sleeping", "Running", "Stopped"], 0, "Z indicates a zombie process."),
+  q("processmedia", "What signal does kill send by default?", ["KILL", "TERM", "STOP", "HUP"], 1, "kill sends TERM by default."),
+  q("processmedia", "Which signal forces termination and cannot be caught or ignored?", ["TERM", "HUP", "KILL", "CONT"], 2, "KILL, often sent with -9, forces termination."),
+  q("processmedia", "Which command starts a process with an adjusted nice value?", ["renice", "nice", "ps", "blkid"], 1, "nice starts a command with an adjusted priority."),
+  q("processmedia", "Which command changes the nice value of an existing process?", ["renice", "nice", "tail", "mount"], 0, "renice changes priority for an existing process."),
+  q("processmedia", "Which command lists block devices in a tree?", ["blkid", "lsblk", "dmesg", "df"], 1, "lsblk lists block devices and their relationships."),
+  q("processmedia", "Which command safely detaches a mounted filesystem before removing media?", ["mount", "umount", "kill", "cat"], 1, "umount detaches a mounted filesystem."),
   q("selinux", "Which command reports SELinux mode as Enforcing, Permissive, or Disabled?", ["getenforce", "chmod", "firewall-cmd", "dnf info"], 0, "getenforce reports the current SELinux mode."),
   q("selinux", "What does SELinux permissive mode do?", ["Logs policy violations without denying them", "Deletes labels", "Blocks every network port", "Disables Unix permissions"], 0, "Permissive mode logs AVC messages but does not deny operations."),
   q("selinux", "Are setenforce changes persistent after reboot?", ["Yes", "No"], 1, "setenforce changes are temporary and revert after restart."),
@@ -1453,6 +1577,10 @@ function translateChoiceText(text) {
     "insert": "insert",
     "Yes": "Si",
     "No": "No",
+    "Zombie": "Zombie",
+    "Sleeping": "Sleeping",
+    "Running": "Running",
+    "Stopped": "Stopped",
     "Permissive": "Permisivo",
     "Zone": "Zona",
     "Encrypted network communication and identity validation": "Comunicacion de red cifrada y validacion de identidad",
@@ -1578,6 +1706,18 @@ function translateQuestionText(text) {
     "Which pair are network file systems?": "Cual par son sistemas de archivos de red?",
     "In LVM, what is a volume group?": "En LVM, que es un volume group?",
     "What is the usual LVM build order?": "Cual es el orden usual para crear LVM?",
+    "Which command identifies a file's type by examining its contents?": "Que comando identifica el tipo de un archivo examinando su contenido?",
+    "Which command is best for paging through a long text file?": "Que comando es mejor para navegar un archivo de texto largo?",
+    "Which command follows new lines added to a growing log file?": "Que comando sigue lineas nuevas agregadas a un log que crece?",
+    "Which command shows a snapshot of running processes?": "Que comando muestra un snapshot de procesos en ejecucion?",
+    "Which command gives a live updating process view?": "Que comando da una vista en vivo de procesos?",
+    "In process state letters, what does Z commonly mean?": "En letras de estado de procesos, que significa comunmente Z?",
+    "What signal does kill send by default?": "Que signal envia kill por defecto?",
+    "Which signal forces termination and cannot be caught or ignored?": "Que signal fuerza terminacion y no puede atraparse ni ignorarse?",
+    "Which command starts a process with an adjusted nice value?": "Que comando inicia un proceso con un valor nice ajustado?",
+    "Which command changes the nice value of an existing process?": "Que comando cambia el valor nice de un proceso existente?",
+    "Which command lists block devices in a tree?": "Que comando lista block devices en forma de arbol?",
+    "Which command safely detaches a mounted filesystem before removing media?": "Que comando desconecta de forma segura un sistema de archivos montado antes de retirar medios?",
     "Which command reports SELinux mode as Enforcing, Permissive, or Disabled?": "Que comando reporta el modo SELinux como Enforcing, Permissive o Disabled?",
     "What does SELinux permissive mode do?": "Que hace el modo permisivo de SELinux?",
     "Are setenforce changes persistent after reboot?": "Los cambios de setenforce persisten despues de reiniciar?",
@@ -1603,6 +1743,18 @@ function translateExplanationText(text) {
     .replace("/etc/fstab stores mount entries that should persist across boots.", "/etc/fstab guarda entradas de montaje que deben persistir entre reinicios.")
     .replace("XFS is the default RHEL local filesystem.", "XFS es el sistema de archivos local predeterminado de RHEL.")
     .replace("NFS and SMB provide network file access.", "NFS y SMB proporcionan acceso a archivos por red.")
+    .replace("file reports file type by inspecting contents and metadata.", "file reporta el tipo de archivo inspeccionando contenido y metadata.")
+    .replace("less lets you scroll and search through long files.", "less permite desplazarte y buscar dentro de archivos largos.")
+    .replace("tail -f follows appended log output.", "tail -f sigue la salida nueva agregada a un log.")
+    .replace("ps shows a process snapshot.", "ps muestra un snapshot de procesos.")
+    .replace("top displays an interactive live process view.", "top muestra una vista interactiva en vivo de procesos.")
+    .replace("Z indicates a zombie process.", "Z indica un proceso zombie.")
+    .replace("kill sends TERM by default.", "kill envia TERM por defecto.")
+    .replace("KILL, often sent with -9, forces termination.", "KILL, frecuentemente enviado con -9, fuerza la terminacion.")
+    .replace("nice starts a command with an adjusted priority.", "nice inicia un comando con prioridad ajustada.")
+    .replace("renice changes priority for an existing process.", "renice cambia prioridad de un proceso existente.")
+    .replace("lsblk lists block devices and their relationships.", "lsblk lista block devices y sus relaciones.")
+    .replace("umount detaches a mounted filesystem.", "umount desconecta un sistema de archivos montado.")
     .replace("getenforce reports the current SELinux mode.", "getenforce reporta el modo SELinux actual.")
     .replace("Permissive mode logs AVC messages but does not deny operations.", "El modo permisivo registra mensajes AVC pero no deniega operaciones.")
     .replace("setenforce changes are temporary and revert after restart.", "Los cambios de setenforce son temporales y se revierten al reiniciar.")
@@ -2154,7 +2306,7 @@ function pickQuizSource(topicId) {
 function balancedFinalQuestions() {
   const buckets = [
     ["basics", "filesystem", "permissions", "users", "vimman", "shell"],
-    ["dnf", "systemd", "networking", "security", "storage", "selinux"],
+    ["dnf", "systemd", "networking", "security", "storage", "processmedia", "selinux"],
     ["exam"]
   ];
   const picked = [

@@ -17,6 +17,7 @@ No build step is required. The app uses plain HTML, CSS, and JavaScript.
 - Daily drills and final practice quizzes
 - Missed-question notebook
 - Command Lab for practical command memorization
+- Process, file viewing, and removable media review
 - English and Spanish modes
 - Offline-friendly app files with a service worker when served over HTTP
 
