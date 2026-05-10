@@ -2392,7 +2392,7 @@ function renderTopic() {
         ${topic.lessons.map((lesson, index) => `
           <button class="lesson-row" data-lesson="${index}">
             <span class="mini-icon">${icon(topic.icon)}</span>
-            <span><strong>${escapeHtml(lesson.title)}</strong><small>${topic.id === "exam" ? escapeHtml(t("Final strategy")) : `${escapeHtml(t("Lesson"))} ${index + 1}`}</small></span>
+            <span><strong>${escapeHtml(lesson.title)}</strong></span>
             <span class="chevron">›</span>
           </button>
         `).join("")}
