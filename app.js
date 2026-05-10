@@ -2227,9 +2227,6 @@ function renderMissesEmpty() {
 
 function renderSources() {
   const sources = [
-    [t("Your Linux Final folder"), t("Study guide and class materials used as the exam-specific spine.")],
-    [t("Primary Red Hat documentation"), t("Used for RHEL DNF, systemd, networking, storage, SELinux, firewalld, and OpenSSH behavior.")],
-    [t("GNU and Linux man pages"), t("Used for command behavior, manual sections, file descriptors, permissions, and account file facts.")],
     [t("Trademark note"), t("Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds, The Linux Foundation, Beyonce, Parkwood Entertainment, Columbia Records, or Sony Music Entertainment.")]
   ];
   return `
