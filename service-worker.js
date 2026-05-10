@@ -1,4 +1,4 @@
-const CACHE_NAME = "work-it-out-linux-v7";
+const CACHE_NAME = "work-it-out-linux-v8";
 const ASSETS = [
   "./",
   "./index.html",

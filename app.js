@@ -590,7 +590,7 @@ const spanishPack = {
     "Primary Red Hat documentation": "Documentacion primaria de Red Hat",
     "GNU and Linux man pages": "GNU y paginas man de Linux",
     "Trademark note": "Nota de marcas",
-    "Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds, The Linux Foundation, Beyonce, Parkwood Entertainment, Columbia Records, or Sony Music Entertainment.": "Linux® es una marca registrada de Linus Torvalds en EE. UU. y otros paises. Esta app no esta afiliada ni respaldada por Linus Torvalds, The Linux Foundation, Beyonce, Parkwood Entertainment, Columbia Records ni Sony Music Entertainment.",
+    "Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds or The Linux Foundation.": "Linux® es una marca registrada de Linus Torvalds en EE. UU. y otros paises. Esta app no esta afiliada ni respaldada por Linus Torvalds ni The Linux Foundation.",
     "Study guide and class materials used as the exam-specific spine.": "Guia de estudio y materiales de clase usados como base especifica del examen.",
     "Used for RHEL DNF, systemd, networking, storage, SELinux, firewalld, and OpenSSH behavior.": "Usada para RHEL DNF, systemd, redes, storage, SELinux, firewalld y OpenSSH.",
     "Used for command behavior, manual sections, file descriptors, permissions, and account file facts.": "Usadas para comportamiento de comandos, secciones man, descriptores, permisos y archivos de cuentas.",
@@ -2227,7 +2227,7 @@ function renderMissesEmpty() {
 
 function renderSources() {
   const sources = [
-    [t("Trademark note"), t("Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds, The Linux Foundation, Beyonce, Parkwood Entertainment, Columbia Records, or Sony Music Entertainment.")]
+    [t("Trademark note"), t("Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. This app is not affiliated with or endorsed by Linus Torvalds or The Linux Foundation.")]
   ];
   return `
     <main class="screen">
